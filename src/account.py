@@ -14,6 +14,7 @@ class Account:
 class AccountProcessor:
     def __init__(self, account: Account):
         self.account = account
+
     def display_balance(self):
         return self.account.amount
 
