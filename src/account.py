@@ -5,11 +5,18 @@ class Account:
         # For third party exchange
         self.routing_number = routing_number
     
-    def deposit(self):
-        pass
+    def deposit(self, amt: float):
+        if 0 <= amt <= 250000:
+            self.amount = amt
+        else:
+            print("Invalid Deposit Amount: Maximum is $250,000")
     
-    def withdraw(self):
-        pass
+    def withdraw(self, amt):
+        if amt <= self.amount and amt > 0:
+            self.amount -= amt
+        else:
+            print("Invalid Withdrawal Amount")
+        
 
 class AccountProcessor:
     def __init__(self, account: Account):
