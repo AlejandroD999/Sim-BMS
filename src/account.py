@@ -1,12 +1,11 @@
 import questionary as qs
 
 class Account:
-    def __init__(self, acc_number, routing_number, balance=0):
+    def __init__(self, acc_number, balance=0):
         self.balance = balance
         self.acc_number = acc_number
         # For third party exchange
-        self.routing_number = routing_number
-    
+        #     
     def deposit(self, amt: float):
         if 0 <= amt <= 250000:
             self.balance += amt
