@@ -1,5 +1,5 @@
 from src.utils import generate_acc_num
-from src.account import Account, AccountProcessor
+from src.acc import Account, AccountProcessor
 from src.prompts import load_intro, prompt_menu, account_selection, error_message
 from src.database.db import create_account
 
