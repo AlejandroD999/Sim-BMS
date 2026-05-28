@@ -20,11 +20,14 @@ def prompt_menu():
 def account_selection():
     # Give options of accounts
     accounts: list = pull_account_nums()
-
+    indexed_accs = [i[:4] for i in accounts]
+    
+    indexed_accs.append("Cancel")
+    
     sel_prompt = questionary.select(
         "Select an account based on the last 4 digits",
         # Last four digits of accounts
-        [i[:4] for i in accounts]).ask()
+        indexed_accs).ask()
 
     return sel_prompt
 
