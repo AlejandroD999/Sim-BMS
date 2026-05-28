@@ -1,6 +1,7 @@
 import questionary
 from rich import print, prompt
 from .format import set_font_color, sh_col_width
+from .database.db import pull_accounts
 
 def load_intro():
     # Print project title
@@ -10,15 +11,25 @@ def load_intro():
 
 def prompt_menu():
     # Give user main menu options
-    prompt_1 = questionary.select(
+    menu = questionary.select(
         "Select an action for account",
         ["Select", "Create", "Exit"]).ask()
 
-    return prompt_1
+    return menu
 
 def account_selection():
     # Give options of accounts
-    pass 
+    accounts: list = pull_accounts()
+
+    sel_prompt = questionary.select(
+        "Select an account based on the last 4 digits",
+        # Last four digits of accounts
+        [i[:4] for i in accounts]).ask()
+
+    return sel_prompt
+
+
+
 
 def error_message(message):
     print(f"[yellow]{message}[/yellow]")

@@ -1,8 +1,10 @@
 import sqlite3
+from pathlib import Path
 import os
 
-CURR_DIR = os.getcwd()
-DB_PATH = os.path.join(CURR_DIR, "accounts.db")
+FILE_DIR = Path(__file__).resolve()
+
+DB_PATH = os.path.join(FILE_DIR.parent, "accounts.db")
 
 def create_accounts_table():
     with sqlite3.connect(DB_PATH) as conn:
@@ -35,8 +37,3 @@ def pull_account_nums():
         accounts = cur.fetchall()
 
     return [x[0] for x in accounts]
-
-if __name__ == "__main__":
-    create_accounts_table()
-
-    print(pull_account_nums())
