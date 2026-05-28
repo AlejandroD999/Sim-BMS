@@ -18,7 +18,15 @@ def create_accounts_table():
 
         cur.execute(acc_table_query)
 
-def pull_accounts():
+def create_account(acc_number, initial_balance):
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cur = conn.cursor()
+
+        cur.execute("INSERT INTO accounts (account_number, balance) VALUES (?, ?)", (acc_number, initial_balance))
+
+
+def pull_account_nums():
     with sqlite3.connect(DB_PATH) as conn:
         cur = conn.cursor()
 
@@ -26,9 +34,9 @@ def pull_accounts():
 
         accounts = cur.fetchall()
 
-    return accounts
+    return [x[0] for x in accounts]
 
 if __name__ == "__main__":
     create_accounts_table()
 
-    print(pull_accounts())
+    print(pull_account_nums())
