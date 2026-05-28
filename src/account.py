@@ -2,8 +2,8 @@ import questionary as qs
 
 class Account:
     def __init__(self, acc_number, balance=0):
-        self.balance = balance
         self.acc_number = acc_number
+        self.balance = balance
         # For third party exchange
         #     
     def deposit(self, amt: float):
@@ -32,6 +32,8 @@ class TransferService:
         
         if from_acc.withdraw(amt):
             to_acc.deposit(amt)
+        
+        # TODO Update database balance after transfer
 
 if __name__ == "__main__":
     acc_1 = Account(24, 54, 500)
