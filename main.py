@@ -1,7 +1,7 @@
 from src.utils import generate_acc_num
 from src.account import Account, AccountProcessor
-from src.prompts import load_intro, prompt_menu, error_message
-import questionary
+from src.prompts import load_intro, prompt_menu, account_selection, error_message
+from src.database.db import create_account
 
 MINIMUM_BALANCE = 5
 RUNNING = True
@@ -14,7 +14,11 @@ while RUNNING:
     menu_action = prompt_menu()
 
     if menu_action.lower() == "select":
-        print(menu_action)
+        chosen_acc = account_selection()
+
+        if chosen_acc == "Cancel":
+            continue
+        # TODO Do something with chosen acc (more menus)
 
     elif menu_action.lower() == "create":
         
@@ -30,9 +34,12 @@ while RUNNING:
             continue
 
 
-        new_acc = Account(generate_acc_num(), starting_balance)
+        new_acc =  Account(generate_acc_num(), starting_balance)
 
-        # TODO save new_acc into database
+        create_account(new_acc.acc_number, new_acc.balance)
+
+        
+        # TODO Give user details of account
 
 
     else:
