@@ -1,6 +1,6 @@
 from src.utils import generate_acc_num
 from src.acc import Account, AccountProcessor
-from src.prompts import load_intro, prompt_menu, account_selection, error_message
+from src.prompts import load_intro, prompt_menu, account_selection, error_message, account_details
 from src.database.db import create_account
 
 MINIMUM_BALANCE = 5
@@ -35,11 +35,11 @@ while RUNNING:
 
 
         new_acc =  Account(generate_acc_num(), starting_balance)
-
-        create_account(new_acc.acc_number, new_acc.balance)
-
         
-        # TODO Give user details of account
+        # Save acc to database
+        create_account(new_acc.acc_number, new_acc.balance)
+        
+        account_details(new_acc)
 
 
     else:
