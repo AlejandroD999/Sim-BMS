@@ -1,5 +1,6 @@
 import sqlite3
 from pathlib import Path
+from ..acc import Account
 import os
 
 FILE_DIR = Path(__file__).resolve()
@@ -37,3 +38,18 @@ def pull_account_nums():
         accounts = cur.fetchall()
 
     return [x[0] for x in accounts]
+
+# TODO Make function to pull full account number
+# THEN update pull_acount_details to use the account_number
+
+def pull_account_details(last_digits):
+    # Uses acc_number to fetch data and returns class 'Account'
+    with sqlite3.connect(DB_PATH) as conn:
+        cur = conn.cursor()
+
+        cur.execute("SELECT account_number, balance FROM accounts WHERE account_number LIKE ?", (f"%{last_digits}",))
+
+        acc = cur.fetchone()
+
+    return Account(acc[0], acc[1])
+
