@@ -34,12 +34,11 @@ def account_selection():
 def error_message(message):
     print(f"[yellow]{message}[/yellow]")
 
-def account_details(account):
+def print_account_details(account):
     title = set_font_color("Account Details", "green").center(sh_col_width)
 
     print(title)
     print("Account Number:", account.acc_number)
     print(f"Balance: ${account.balance}")
     print(set_font_color("\nTip: Remember last four digits of account number", "red"))
-    input("Press Enter to continue")
     
