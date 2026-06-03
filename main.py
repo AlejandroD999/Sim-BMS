@@ -18,7 +18,9 @@ while RUNNING:
 
         if chosen_acc == "Cancel":
             continue
-        acc = pull_account_details(chosen_acc)
+
+        acc_details = pull_account_details(chosen_acc)
+        acc = Account(acc_details[0], acc_details[1])
 
         print_account_details(acc)
 
