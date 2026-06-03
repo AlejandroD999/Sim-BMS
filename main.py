@@ -37,9 +37,8 @@ while RUNNING:
         acc_details = pull_account_details(chosen_acc)
         acc = Account(acc_details[0], acc_details[1])
 
-
+        print_account_details(acc)
         
-
         # TODO Do something with chosen acc (more menus)
 
     elif menu_action.lower() == "create":
