@@ -1,6 +1,5 @@
 import sqlite3
 from pathlib import Path
-from ..acc import Account
 import os
 
 FILE_DIR = Path(__file__).resolve()
@@ -51,5 +50,11 @@ def pull_account_details(last_digits):
 
         acc = cur.fetchone()
 
-    return Account(acc[0], acc[1])
+    return acc
+
+def update_balance(acc_number, new_balance):
+    with sqlite3.connect(DB_PATH) as conn:
+        cur = conn.cursor()
+
+        cur.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_balance, acc_number))
 
