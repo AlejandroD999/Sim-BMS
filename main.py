@@ -1,10 +1,25 @@
 from src.utils import generate_acc_num
-from src.acc import Account, AccountProcessor
+from src.acc import Account, TransferService 
 from src.prompts import load_intro, prompt_menu, account_selection, error_message, print_account_details
 from src.database.db import create_account, pull_account_details
 
 MINIMUM_BALANCE = 5
 RUNNING = True
+
+def test_transfer():
+    acc_1_dets = pull_account_details("7194")
+    acc_2_dets = pull_account_details("6001")
+
+    acc_1 = Account(acc_1_dets[0], acc_1_dets[1])
+    acc_2 = Account(acc_2_dets[0], acc_2_dets[1])
+
+    service = TransferService()
+
+    service.transfer(acc_1, acc_2, 20)
+
+    print_account_details(acc_1)
+    print("======================================")
+    print_account_details(acc_2)
 
 # Interface
 while RUNNING:
@@ -22,7 +37,8 @@ while RUNNING:
         acc_details = pull_account_details(chosen_acc)
         acc = Account(acc_details[0], acc_details[1])
 
-        print_account_details(acc)
+
+        
 
         # TODO Do something with chosen acc (more menus)
 
