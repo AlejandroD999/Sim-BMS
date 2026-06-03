@@ -1,4 +1,5 @@
 import questionary as qs
+from .database import db
 
 class Account:
     def __init__(self, acc_number, balance=0):
@@ -9,13 +10,18 @@ class Account:
     def deposit(self, amt: float):
         if 0 <= amt <= 250000:
             self.balance += amt
+            db.update_balance(self.acc_number, self.balance)
+
         else:
             print("Invalid deposit amount: maximum is $250,000")
     
     def withdraw(self, amt):
+
         if amt <= self.balance and amt > 0:
             self.balance -= amt
+            db.update_balance(self.acc_number, self.balance)
             return True
+        
         else:
             print("Invalid withdrawal amount")
             return False
