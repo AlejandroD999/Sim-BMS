@@ -1,6 +1,6 @@
 from src.utils import generate_acc_num
 from src.acc import Account, TransferService 
-from src.prompts import load_intro, prompt_menu, account_selection, error_message, print_account_details, selection_menu
+from src.prompts import load_intro, prompt_menu, account_selection, error_message, print_account_details, account_interface
 from src.database.db import create_account, pull_account_details
 
 MINIMUM_BALANCE = 5
@@ -37,9 +37,29 @@ while RUNNING:
         acc_details = pull_account_details(chosen_acc)
         acc = Account(acc_details[0], acc_details[1])
 
-        print_account_details(acc)
+        # Account Interface
         
-        # TODO Do something with chosen acc (more menus)
+        acc_action = account_interface(acc)
+
+        while acc_action.lower() != "menu":
+
+            if acc_action.lower() == "deposit":           
+                try:     
+                    deposit_amount = float(input("Deposit Amount: "))
+                    acc.deposit(deposit_amount)
+
+                except ValueError:
+                    error_message("Amount must be a number")
+
+            elif acc_action.lower() == "withdraw":
+                pass
+
+            elif acc_action.lower() == "transfer":
+                pass
+            
+            input("Press Enter to continue ")
+            acc_action = account_interface(acc)
+        
 
     elif menu_action.lower() == "create":
         
