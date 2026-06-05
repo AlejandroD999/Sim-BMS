@@ -41,4 +41,10 @@ def print_account_details(account):
     print("Account Number:", account.acc_number)
     print(f"Balance: ${account.balance}")
     print(set_font_color("\nTip: Remember last four digits of account number", "red"))
+
+def selection_menu():
+    prompt = questionary.select(
+        "What would you like to do",
+        choices=["deposit", "withdraw", "transfer"]).ask()
     
+    return prompt
