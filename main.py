@@ -52,7 +52,12 @@ while RUNNING:
                     error_message("Amount must be a number")
 
             elif acc_action.lower() == "withdraw":
-                pass
+                try:     
+                    withdrawal_amount = float(input("Withdrawal Amount: "))
+                    acc.withdraw(withdrawal_amount)
+
+                except ValueError:
+                    error_message("Amount must be a number")
 
             elif acc_action.lower() == "transfer":
                 pass
