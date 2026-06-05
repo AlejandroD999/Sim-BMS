@@ -17,11 +17,21 @@ def prompt_menu():
 
     return menu
 
-def account_selection():
+def account_selection(exceptions: list = None):
     # Give options of accounts
     accounts: list = pull_account_nums()
+
+    if exceptions:
+        for exception in exceptions:
+            if exception in accounts:
+                accounts.remove(exception)
+            else:
+                error_message("Invalid Exception")
+    
     indexed_accs = [i[3:] for i in accounts]
     
+
+
     indexed_accs.append("Cancel")
     
     sel_prompt = questionary.select(
