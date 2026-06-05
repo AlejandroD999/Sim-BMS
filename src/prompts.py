@@ -1,5 +1,5 @@
 import questionary
-from rich import print, prompt
+from rich import print
 from .format import set_font_color, sh_col_width
 from .database.db import pull_account_nums
 
@@ -47,6 +47,6 @@ def account_interface(account):
 
     prompt = questionary.select(
         "What would you like to do",
-        choices=["deposit", "withdraw", "transfer", "menu"]).ask()
+        choices=["Deposit", "Withdraw", "Transfer", "Menu"]).ask()
     
     return prompt
