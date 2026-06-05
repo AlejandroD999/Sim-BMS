@@ -1,7 +1,9 @@
 from src.utils import generate_acc_num
 from src.acc import Account, TransferService 
-from src.prompts import load_intro, prompt_menu, account_selection, error_message, print_account_details, account_interface
+from src.format import set_font_color
+from src.prompts import header, prompt_menu, account_selection, error_message, print_account_details, account_interface
 from src.database.db import create_account, pull_account_details
+from rich import print as r_print
 
 MINIMUM_BALANCE = 5
 RUNNING = True
@@ -9,7 +11,7 @@ RUNNING = True
 # Interface
 while RUNNING:
 
-    load_intro()
+    header("*** Welcome to Sim BMS ***", "blue")
 
     menu_action = prompt_menu()
 
@@ -45,9 +47,19 @@ while RUNNING:
                     error_message("Amount must be a number")
 
             elif acc_action.lower() == "transfer":
-                account_selection(acc.acc_number)
-            
-            input("Press Enter to continue ")
+                header("Transfer Service", "blue")
+
+                r_print(set_font_color("Select a Receiver:", "green"))
+
+                receiver_details = pull_account_details(account_selection([acc.acc_number]))
+                receiver = Account(receiver_details[0], receiver_details[1])
+
+                amount_to_send = input("Amount to Send: ")
+
+                transfer_srvc.transfer(acc, receiver, amount_to_send)
+                r_print(set_font_color(f"Successfully sent: ${amount_to_send}", "green"))
+
+            input("\nPress Enter to continue ")
             acc_action = account_interface(acc)
         
 
