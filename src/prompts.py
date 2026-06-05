@@ -3,10 +3,10 @@ from rich import print
 from .format import set_font_color, sh_col_width
 from .database.db import pull_account_nums
 
-def load_intro():
+def header(message, color):
     # Print project title
     print("")
-    text = set_font_color("*** Welcome to Sim BMS ***", "green")
+    text = set_font_color(message, color)
     print(text.center(sh_col_width))
 
 def prompt_menu():
@@ -30,12 +30,10 @@ def account_selection(exceptions: list = None):
     
     indexed_accs = [i[3:] for i in accounts]
     
-
-
     indexed_accs.append("Cancel")
     
     sel_prompt = questionary.select(
-        "Select an account based on the last 4 digits",
+        "Last 4 digits of account",
         # Last four digits of accounts
         indexed_accs).ask()
 
