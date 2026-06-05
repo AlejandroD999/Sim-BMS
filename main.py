@@ -6,21 +6,6 @@ from src.database.db import create_account, pull_account_details
 MINIMUM_BALANCE = 5
 RUNNING = True
 
-def test_transfer():
-    acc_1_dets = pull_account_details("7194")
-    acc_2_dets = pull_account_details("6001")
-
-    acc_1 = Account(acc_1_dets[0], acc_1_dets[1])
-    acc_2 = Account(acc_2_dets[0], acc_2_dets[1])
-
-    service = TransferService()
-
-    service.transfer(acc_1, acc_2, 20)
-
-    print_account_details(acc_1)
-    print("======================================")
-    print_account_details(acc_2)
-
 # Interface
 while RUNNING:
 
@@ -36,9 +21,9 @@ while RUNNING:
 
         acc_details = pull_account_details(chosen_acc)
         acc = Account(acc_details[0], acc_details[1])
-
-        # Account Interface
+        transfer_srvc = TransferService()
         
+        # Account Interface
         acc_action = account_interface(acc)
 
         while acc_action.lower() != "menu":
@@ -60,7 +45,7 @@ while RUNNING:
                     error_message("Amount must be a number")
 
             elif acc_action.lower() == "transfer":
-                pass
+                account_selection(acc.acc_number)
             
             input("Press Enter to continue ")
             acc_action = account_interface(acc)
