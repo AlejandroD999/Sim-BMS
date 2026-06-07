@@ -11,7 +11,7 @@ RUNNING = True
 # Interface
 while RUNNING:
 
-    header("*** Welcome to Sim BMS ***", "blue")
+    header("|_-_Welcome to Sim BMS_-_|", "yellow")
 
     menu_action = prompt_menu()
 
@@ -23,7 +23,7 @@ while RUNNING:
 
         acc_details = pull_account_details(chosen_acc)
         acc = Account(acc_details[0], acc_details[1])
-        transfer_srvc = TransferService()
+        transfer_service = TransferService()
         
         # Account Interface
         acc_action = account_interface(acc)
@@ -50,7 +50,7 @@ while RUNNING:
                     error_message("Amount must be a number")
 
             elif acc_action.lower() == "transfer":
-                header("Transfer Service", "blue")
+                header("Transfer Service", "yellow")
 
                 r_print(set_font_color("Select a Receiver:", "green"))
 
@@ -59,7 +59,7 @@ while RUNNING:
 
                 amount_to_send = input("Amount to Send: ")
 
-                transfer_srvc.transfer(acc, receiver, amount_to_send)
+                transfer_service.transfer(acc, receiver, amount_to_send)
                 r_print(set_font_color(f"Successfully sent: ${amount_to_send}", "green"))
 
             input("\nPress Enter to continue ")
@@ -88,7 +88,6 @@ while RUNNING:
         print_account_details(new_acc)
         # Pause
         input("Press Enter to continue")
-
 
     else:
         RUNNING = False

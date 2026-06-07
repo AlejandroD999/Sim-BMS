@@ -28,33 +28,32 @@ def account_selection(exceptions: list = None):
             else:
                 error_message("Exception Denied")
     
-    indexed_accs = [i[3:] for i in accounts]
+    acc_digits = [i[-4:] for i in accounts]
     
-    indexed_accs.append("Cancel")
+    acc_digits.append("Cancel")
     
-    sel_prompt = questionary.select(
+    prompt = questionary.select(
         "Last 4 digits of account",
         # Last four digits of accounts
-        indexed_accs).ask()
+        acc_digits).ask()
 
-    return sel_prompt
+    return prompt
 
 def error_message(message):
-    print(f"[yellow]{message}[/yellow]")
+    print(set_font_color(message, "red"))
 
 def print_account_details(account):
-    title = set_font_color("Account Details", "green").center(sh_col_width)
+    title = set_font_color("Account Details", "yellow").center(sh_col_width)
 
     print(title)
     print("Account Number:", account.acc_number)
     print(f"Balance: ${account.balance}")
-    print(set_font_color("\nTip: Remember last four digits of account number", "red"))
+    print(set_font_color("\nTip: Remember last four digits of account number", "green"))
 
 def account_interface(account):
-    print_account_details(account)
 
     prompt = questionary.select(
-        "What would you like to do",
+        "Select an action",
         choices=["Status", "Deposit", "Withdraw", "Transfer", "Menu"]).ask()
     
     return prompt
