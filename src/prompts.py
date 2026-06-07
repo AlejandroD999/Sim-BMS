@@ -26,7 +26,7 @@ def account_selection(exceptions: list = None):
             if exception in accounts:
                 accounts.remove(exception)
             else:
-                error_message("Invalid Exception")
+                error_message("Exception Denied")
     
     indexed_accs = [i[3:] for i in accounts]
     
@@ -55,6 +55,6 @@ def account_interface(account):
 
     prompt = questionary.select(
         "What would you like to do",
-        choices=["Deposit", "Withdraw", "Transfer", "Menu"]).ask()
+        choices=["Status", "Deposit", "Withdraw", "Transfer", "Menu"]).ask()
     
     return prompt

@@ -30,7 +30,10 @@ while RUNNING:
 
         while acc_action.lower() != "menu":
 
-            if acc_action.lower() == "deposit":           
+            if acc_action.lower() == "status":
+                print_account_details(acc)            
+
+            elif acc_action.lower() == "deposit":           
                 try:     
                     deposit_amount = float(input("Deposit Amount: "))
                     acc.deposit(deposit_amount)
